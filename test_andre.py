@@ -6,8 +6,9 @@ e é aí que vai ser guardado o dataset (que está no formato YOLOv7 pytorch).
 
 """
 
-import os
 
+import os
+"""
 os.system("pip install roboflow")
 os.system("cd /home/andre/Desktop") #Mudar para o desktop pq ao fazer o download para dentro desta pasta depois não consigo dar push para o github
 
@@ -18,23 +19,40 @@ project = rf.workspace("feup-ohds6").project("taco_graffiti")
 dataset = project.version(2).download("yolov7")
 
 """
-os.system("pip install fiftyone")
+
+#os.system("pip install fiftyone")
 
 import fiftyone as fo
 import fiftyone.zoo as foz
 
-dataset = foz.load_zoo_dataset("quickstart")
+#dataset = foz.load_zoo_dataset("quickstart")
 
 dataset = foz.load_zoo_dataset(
               "open-images-v7",
               split="train",
               label_types=["detections"],
               classes=["Person", "Vehicle registration plate"],
-              max_samples=1000,
+              max_samples=100,
           )
 
-session = fo.launch_app(dataset)
+dataset = foz.load_zoo_dataset(
+              "open-images-v7",
+              split="validation",
+              label_types=["detections"],
+              classes=["Person", "Vehicle registration plate"],
+              max_samples=100,
+          )
 
-session.wait()
+dataset = foz.load_zoo_dataset(
+              "open-images-v7",
+              split="test",
+              label_types=["detections"],
+              classes=["Person", "Vehicle registration plate"],
+              max_samples=100,
+          )
 
-"""
+
+#session = fo.launch_app(dataset)
+
+#session.wait()
+
