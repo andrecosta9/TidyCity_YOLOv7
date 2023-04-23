@@ -130,7 +130,8 @@ def detect(save_img=False):
                         
 
                         #Adicionado por mim, para desfocar as pessoas detetadas
-                        if(names[int(cls)] == 'person'):
+                        """
+                        if(names[int(cls)] == 'Person' or 'Vehicle registration plate'):
                           x_min = int(xyxy[0]);
                           y_min = int(xyxy[1]);
                           x_max = int(xyxy[2]);
@@ -141,6 +142,7 @@ def detect(save_img=False):
                           
                           im0[y_min:y_max, x_min:x_max] = blur_image
 
+                        """
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')

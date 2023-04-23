@@ -2,12 +2,22 @@
 #download: bash ./scripts/get_coco.sh
 
 # train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
-train: /home/andre/fiftyone/open-images-v7/train/images  # 118287 images
-val: /home/andre/fiftyone/open-images-v7/validation/images # 5000 images
-test: /home/andre/fiftyone/open-images-v7/test/images  # 20288 of 40670 images, submit to https://competitions.codalab.org/competitions/20794
+#train: /mnt/c/Users/ccvcauser2/Desktop/open-images-v7/train/images/autosplit_train.txt
+train: /mnt/c/Users/ccvcauser2/Desktop/Datasets/PeopleLicenses_PlasticBagWasteContainer_LabelStudio/train/images/autosplit_train.txt
+#val: /mnt/c/Users/ccvcauser2/Desktop/open-images-v7/train/images/autosplit_val.txt 
+val: /mnt/c/Users/ccvcauser2/Desktop/Datasets/PeopleLicenses_PlasticBagWasteContainer_LabelStudio/train/images/autosplit_val.txt
+#test: /mnt/c/Users/ccvcauser2/Desktop/faceslicenses_dataset/test/images
+#test: /mnt/c/Users/ccvcauser2/Desktop/peoplelicenses_dataset_merge10k/images/autosplit_test.txt
 
 # number of classes
 nc: 2
 
 # class names
-names: [ 'Person', 'Vehicle registration plate' ]
+names: [ 'Person', 'License plate']
+#names: ['Plastic bag', 'Waste container']
+#names: ['License plate', 'Person', 'Plastic bag', 'Waste container']
+#names: ["Plastic bag", "Waste container", "Billboard", "Traffic sign", "Stop sign",
+#                        "Sofa bed", "Couch", "Studio couch", "Bed", "Infant bed", "Television",
+#                        "Refrigerator", "Washing machine", "Home appliance", "Kitchen appliance", 
+#                        "Shelf", "Cabinetry", "Bathroom cabinet", "Filing cabinet", "Chest of drawers",
+#                        "Drawer", "Nightstand", "Table", "Coffee table", "Kitchen & dining room table", "Cupboard"]
