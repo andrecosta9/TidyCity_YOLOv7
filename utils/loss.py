@@ -683,6 +683,7 @@ class ComputeLossOTA:
                 all_gi.append(gi)
                 all_anch.append(anch[i][idx])
                 from_which_layer.append((torch.ones(size=(len(b),)) * i).to(device))
+                #from_which_layer.append((torch.ones(size=(len(b),)) * i).to('cuda'))
                 
                 fg_pred = pi[b, a, gj, gi]                
                 p_obj.append(fg_pred[:, 4:5])
@@ -739,8 +740,8 @@ class ComputeLossOTA:
                 + 3.0 * pair_wise_iou_loss
             )
 
-            #matching_matrix = torch.zeros_like(cost, device=device)
-            matching_matrix = torch.zeros_like(cost, device='cpu')
+            matching_matrix = torch.zeros_like(cost, device=device)
+            #matching_matrix = torch.zeros_like(cost, device='cpu')
 
             for gt_idx in range(num_gt):
                 _, pos_idx = torch.topk(
@@ -755,6 +756,7 @@ class ComputeLossOTA:
                 matching_matrix[:, anchor_matching_gt > 1] *= 0.0
                 matching_matrix[cost_argmin, anchor_matching_gt > 1] = 1.0
             fg_mask_inboxes = (matching_matrix.sum(0) > 0.0).to(device)
+            #fg_mask_inboxes = (matching_matrix.sum(0) > 0.0).to('cuda')
             matched_gt_inds = matching_matrix[:, fg_mask_inboxes].argmax(0)
         
             from_which_layer = from_which_layer[fg_mask_inboxes]

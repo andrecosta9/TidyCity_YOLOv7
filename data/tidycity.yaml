@@ -2,9 +2,9 @@
 #download: bash ./scripts/get_coco.sh
 
 # train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
-train: /mnt/c/Users/ccvcauser2/Desktop/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train/images/autosplit_train.txt
+train: /mnt/c/Users/ccvcauser2/Desktop/Andre_FEUP/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train/images/autosplit_train.txt
 #train: /mnt/c/Users/ccvcauser2/Desktop/peoplelicenses_dataset_merge4k/images/autosplit_train.txt
-val: /mnt/c/Users/ccvcauser2/Desktop/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train/images/autosplit_val.txt 
+val: /mnt/c/Users/ccvcauser2/Desktop/Andre_FEUP/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train/images/autosplit_val.txt 
 #val: /mnt/c/Users/ccvcauser2/Desktop/peoplelicenses_dataset_merge4k/images/autosplit_val.txt
 #test: /mnt/c/Users/ccvcauser2/Desktop/faceslicenses_dataset/test/images
 #test: /mnt/c/Users/ccvcauser2/Desktop/peoplelicenses_dataset_merge10k/images/autosplit_test.txt

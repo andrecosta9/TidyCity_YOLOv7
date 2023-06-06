@@ -3,8 +3,8 @@ import os.path
 import shutil
 
 main_path = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/'
-dataset1_name = 'TidyCity_7classes_LabelStudio_bagwasteOpenImages'
-dataset2_name = 'Amesterdam_8classes_corrected'
+dataset1_name = 'Cardboard_missingDatasets'
+dataset2_name = 'TidyCity_8classes_LabelStudio_OpenImages_Amesterdam'
 
 #Path to the images and labels directories of dataset1
 images_directory1 = main_path + dataset1_name + '/train/images/'
@@ -17,7 +17,7 @@ labels_directory2 = main_path + dataset2_name + '/train/labels/'
 #Classes in dataset1 and dataset2
 
 #MELHORAR ISTO. Isto deve ser lido do ficheiro .yaml!
-classes_dataset1 = ['Person', 'License plate', 'Plastic bag', 'Waste container', 'Billboard', 'Traffic sign', 'Graffiti']
+classes_dataset1 = ['Cardboard']
 classes_dataset2 = ['Person', 'License plate', 'Plastic bag', 'Waste container', 'Billboard', 'Traffic sign', 'Graffiti', 'Cardboard']
 classes_merged_dataset = ['Person', 'License plate', 'Plastic bag', 'Waste container', 'Billboard', 'Traffic sign', 'Graffiti', 'Cardboard']
 
@@ -113,6 +113,8 @@ def merge_datasets():
     create_merged_directories()
 
     print("Finished merging the images!")
+
+    #MELHORAR ISTO..... CASO EXISTA UMA IMAGEM EM COMUM QUE JÁ TENHA CLASSES EM COMUM ENTRE DATASETS, ESCREVER NO FICHEIRO .TXT APENAS OS LABELS QUE FALTAM E AJUSTAR O CLASS_ID DOS QUE JÁ LÁ ESTAVAM
 
     #Merge the labels from dataset1 and dataset2
     for filename in os.listdir(labels_directory1):

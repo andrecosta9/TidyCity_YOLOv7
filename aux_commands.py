@@ -8,17 +8,19 @@ import os
 """ os.system("python3 train_aux.py --weights ../Results/yolov7-e6e_TidyCity_7classes_LabelStudio/train/exp/weights/best.pt  --data data/tidycity.yaml --workers 2 --epochs 50 --batch-size 4 --img 1280 --cfg cfg/training/yolov7-e6e_tidycity.yaml --project ../Results/yolov7-e6e_TidyCity_7classes_LabelStudio_bagwasteOpenImages/train")
 os.system("python3 test.py --weights ../Results/yolov7-e6e_TidyCity_7classes_LabelStudio_bagwasteOpenImages/train/exp/weights/best.pt --conf 0.25 --img-size 1280 --data data/tidycity.yaml --project ../Results/yolov7-e6e_TidyCity_7classes_LabelStudio_bagwasteOpenImages/test --batch-size 1")
  """
-#Path to the directory containing the images
-images_directory = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train/images'
+#####################
+""" #Path to the directory containing the images
+images_directory = '/mnt/c/Users/ccvcauser2/Desktop/Andre_FEUP/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train/images'
 
 #Split dataset in train, validation and test subsets
 from utils.datasets import * 
 
 autosplit(images_directory, [0.7, 0.3, 0.0], annotated_only=False)
 
-#os.system("python3 train_aux.py --weights ../Models/yolov7-e6.pt --data data/faceslicenses.yaml --workers 1 --epochs 50 --batch-size 8 --img 1280 --cfg cfg/training/yolov7-e6_faceslicenses.yaml --project ../Results/yolov7-e6_5k_peoplelicenses_augmented/train")
+os.system("python3 train_aux.py --weights ../Models/yolov7-e6e.pt --data data/tidycity.yaml --workers 2 --epochs 50 --batch-size 4 --img 1280 --cfg cfg/training/yolov7-e6e_tidycity.yaml --project ../Results/yolov7-e6e_TidyCity_8classes_onlyWithPretrainedCOCO/train")
 
-
+ """
+ ######################
 """ import csv
 
 #Path to the files containing the labels
@@ -54,8 +56,8 @@ MergeTrainTestLabels(train_labels, test_labels, labels) """
 
 #os.system('fiftyone convert --input-dir /mnt/c/Users/ccvcauser2/Desktop/coco-2017/train --input-type fiftyone.types.COCODetectionDataset --output-dir /mnt/c/Users/ccvcauser2/Desktop/coco-2017/ --output-type fiftyone.types.YOLOv5Dataset')
 
-""" images_dir = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/people_dataset_3k_corrected/images'
-labels_dir = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/people_dataset_3k_corrected/labels'
+images_dir = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/label_studio/batch1_2_3_corrected/images'
+labels_dir = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/label_studio/batch1_2_3_corrected/labels'
 
 #Read all image names in the images directory and change it to the first 12 characters plus ".jpg"
 
@@ -68,8 +70,8 @@ def RenameImages(images_dir):
     for image in images:
         #Get the image name
         image_name = os.path.basename(image)
-        #Change the image name to the first 12 characters plus ".jpg"
-        os.rename(image, os.path.join(images_dir, image_name[:12] + ".jpg"))
+        #Change the image name to the first 12? characters plus ".jpg"
+        os.rename(image, os.path.join(images_dir, image_name[:36] + ".jpg"))
 
 
 def RenameLabels(labels_dir):
@@ -78,8 +80,8 @@ def RenameLabels(labels_dir):
     for label in labels:
         #Get the label name
         label_name = os.path.basename(label)
-        #Change the label name to the first 12 characters plus ".txt"
-        os.rename(label, os.path.join(labels_dir, label_name[:12] + ".txt"))
+        #Change the label name to the first 12? characters plus ".txt"
+        os.rename(label, os.path.join(labels_dir, label_name[:36] + ".txt"))
 
 RenameImages(images_dir)
-RenameLabels(labels_dir) """
+RenameLabels(labels_dir)

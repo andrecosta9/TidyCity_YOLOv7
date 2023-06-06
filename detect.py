@@ -129,9 +129,9 @@ def detect(save_img=False):
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
                         
 
-                        #Adicionado por mim, para desfocar as pessoas detetadas
+                        #Adicionado por mim, para desfocar as pessoas e as matrículas detetadas
                         """
-                        if(names[int(cls)] == 'Person' or 'Vehicle registration plate'):
+                        if(names[int(cls)] == 'Person' or 'License plate'):
                           x_min = int(xyxy[0]);
                           y_min = int(xyxy[1]);
                           x_max = int(xyxy[2]);
