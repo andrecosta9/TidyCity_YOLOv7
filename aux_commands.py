@@ -9,7 +9,7 @@ import os
 os.system("python3 test.py --weights ../Results/yolov7-e6e_TidyCity_7classes_LabelStudio_bagwasteOpenImages/train/exp/weights/best.pt --conf 0.25 --img-size 1280 --data data/tidycity.yaml --project ../Results/yolov7-e6e_TidyCity_7classes_LabelStudio_bagwasteOpenImages/test --batch-size 1")
  """
 #####################
-""" #Path to the directory containing the images
+#Path to the directory containing the images
 images_directory = '/mnt/c/Users/ccvcauser2/Desktop/Andre_FEUP/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train/images'
 
 #Split dataset in train, validation and test subsets
@@ -17,9 +17,9 @@ from utils.datasets import *
 
 autosplit(images_directory, [0.7, 0.3, 0.0], annotated_only=False)
 
-os.system("python3 train_aux.py --weights ../Models/yolov7-e6e.pt --data data/tidycity.yaml --workers 2 --epochs 50 --batch-size 4 --img 1280 --cfg cfg/training/yolov7-e6e_tidycity.yaml --project ../Results/yolov7-e6e_TidyCity_8classes_onlyWithPretrainedCOCO/train")
+#os.system("python3 train_aux.py --weights ../Models/yolov7-e6e.pt --data data/tidycity.yaml --workers 2 --epochs 50 --batch-size 4 --img 1280 --cfg cfg/training/yolov7-e6e_tidycity.yaml --project ../Results/yolov7-e6e_TidyCity_8classes_onlyWithPretrainedCOCO/train")
 
- """
+
  ######################
 """ import csv
 
@@ -56,7 +56,7 @@ MergeTrainTestLabels(train_labels, test_labels, labels) """
 
 #os.system('fiftyone convert --input-dir /mnt/c/Users/ccvcauser2/Desktop/coco-2017/train --input-type fiftyone.types.COCODetectionDataset --output-dir /mnt/c/Users/ccvcauser2/Desktop/coco-2017/ --output-type fiftyone.types.YOLOv5Dataset')
 
-images_dir = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/label_studio/batch1_2_3_corrected/images'
+""" images_dir = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/label_studio/batch1_2_3_corrected/images'
 labels_dir = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/label_studio/batch1_2_3_corrected/labels'
 
 #Read all image names in the images directory and change it to the first 12 characters plus ".jpg"
@@ -84,4 +84,4 @@ def RenameLabels(labels_dir):
         os.rename(label, os.path.join(labels_dir, label_name[:36] + ".txt"))
 
 RenameImages(images_dir)
-RenameLabels(labels_dir)
+RenameLabels(labels_dir) """

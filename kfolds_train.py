@@ -5,22 +5,28 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import MultiLabelBinarizer
 
 
-TRAIN_PATH = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/label_studio/batch1_2_3_corrected'
-IMG_SIZE = 640
-BATCH_SIZE = 32
+#TRAIN_PATH = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/label_studio/batch1_2_3_corrected'
+TRAIN_PATH = '/mnt/c/Users/ccvcauser2/Desktop/Datasets/TidyCity_8classes_LabelStudio_OpenImages_Amesterdam/train'
+#IMG_SIZE = 640
+IMG_SIZE = 1280
+#BATCH_SIZE = 32
+BATCH_SIZE = 16
 WORKERS = 2
-EPOCHS = 40
+EPOCHS = 60
 SEED = 42
 NUM_FOLD = 5
-CFG = 'cfg/training/yolov7-tiny_faceslicenses.yaml'
+#CFG = 'cfg/training/yolov7-tiny_faceslicenses.yaml'
+CFG = 'cfg/training/yolov7-e6e_tidycity.yaml'
 #WEIGHTS = '../Results/yolov7/yolov7-e6e_TidyCity_7classes_LabelStudio_bagwasteOpenImages/train/exp/weights/best.pt'
-WEIGHTS = '../Models/yolov7-tiny.pt'
-#PROJECT = '../Results/yolov7/yolov7-e6e_TidyCity_8classes_5_kfolds/train'
-PROJECT = '../Results/yolov7/yolov7-tiny_peoplelicenses_kfolds/train'
+#WEIGHTS = '../Models/yolov7-tiny.pt'
+WEIGHTS = '../Results/yolov7/yolov7-tiny_batch123_kfolds/train'
 
-NUM_CLASSES = 2
-#CLASSES_NAMES = ['Person', 'License plate', 'Plastic bag', 'Waste container', 'Billboard', 'Traffic sign', 'Graffiti', 'Cardboard']
-CLASSES_NAMES = ['Person', 'License plate']
+PROJECT = '../Results/yolov7/yolov7-tiny_batch123_kfolds/train'
+#PROJECT = '../Results/yolov7/yolov7-tiny_peoplelicenses_kfolds/train'
+
+NUM_CLASSES = 8
+CLASSES_NAMES = ['Person', 'License plate', 'Plastic bag', 'Waste container', 'Billboard', 'Traffic sign', 'Graffiti', 'Cardboard']
+#CLASSES_NAMES = ['Person', 'License plate']
 
 
 
@@ -226,19 +232,20 @@ def create_folds(TRAIN_PATH, NUM_FOLD, SEED):
 ################ MAIN ################
 
 
-#create_folds(TRAIN_PATH, NUM_FOLD, SEED)
+create_folds(TRAIN_PATH, NUM_FOLD, SEED)
 
 #WEIGHTS_TEST = f'{WEIGHTS}/fold_{fold}/exp/weights/best.pt'
-CONF_THRES = 0.35
+CONF_THRES = 0.25
+PROJECT_TEST = '../Results/yolov7/yolov7-tiny_batch123_kfolds/test'
 #PROJECT_TEST = '../Results/yolov7/yolov7-e6e_TidyCity_8classes_5_kfolds/test'
-PROJECT_TEST = '../Results/yolov7/yolov7-e6e_TidyCity_8classes_5_kfolds_onlyWithPretrainedCOCO/test'
+#PROJECT_TEST = '../Results/yolov7/yolov7-tiny_peoplelicenses_kfolds/test'
 
 #Run the training script for each fold
 for fold in range(NUM_FOLD):    
     print('TRAINING WITH FOLD', fold, ': ', '\n')
 
     #Don't forget that for yolov7-tiny you need to use the train.py instead of train_aux.py
-    os.system(f'python3 train.py --img {IMG_SIZE} \
+    """ os.system(f'python3 train.py --img {IMG_SIZE} \
                     --batch-size {BATCH_SIZE} \
                     --workers {WORKERS} \
                     --epochs {EPOCHS} \
@@ -246,7 +253,18 @@ for fold in range(NUM_FOLD):
                     --cfg {CFG} \
                     --weights {WEIGHTS} \
                     --save_period 10\
-                    --project {PROJECT}/fold_{fold} ')
+                    --project {PROJECT}/fold_{fold} ') """
+    
+    #kfolds with checkpoint
+    """ os.system(f'python3 train.py --img {IMG_SIZE} \
+                    --batch-size {BATCH_SIZE} \
+                    --workers {WORKERS} \
+                    --epochs {EPOCHS} \
+                    --data {TRAIN_PATH}/folds/fold_{fold}/fold_{fold}.yaml \
+                    --cfg {CFG} \
+                    --weights {WEIGHTS}/fold_{fold}/exp/weights/best.pt \
+                    --save_period 10\
+                    --project {PROJECT}/fold_{fold} ') """
     
     """ #To train with the best weights of the previous fold
     os.system(f'python3 train_aux.py --img {IMG_SIZE} \

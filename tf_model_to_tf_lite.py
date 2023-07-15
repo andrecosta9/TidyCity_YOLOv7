@@ -8,9 +8,9 @@ os.system(f'python3 export.py --weights {path1} --grid --end2end --simplify \
 
 #Convert from onnx to tensorflow
 
-path0 = '../Results/yolov7/yolov7-e6e_TidyCity_8classes_LabelStudio_OpenImages_Amesterdam_corrected/train/exp/weights/'
+""" path0 = '../Results/yolov7/yolov7-e6e_TidyCity_8classes_LabelStudio_OpenImages_Amesterdam_corrected/train/exp/weights/'
 path2 = path0 + 'best.onnx'
-os.system(f'onnx-tf convert -i {path2} -o {path0}')
+os.system(f'onnx-tf convert -i {path2} -o {path0}') """
 
 #pip install onnx_tf
 """ import onnx
@@ -28,3 +28,12 @@ tflite_model = converter.convert()
 
 with open('runs/train/exp11/weights/yolov7_tiny.tflite', 'wb') as f:
 	f.write(tflite_model) """
+    
+
+import tensorflow as tf
+
+converter = tf.lite.TFLiteConverter.from_saved_model('../Results/yolov7/yolov7-e6e_batch1_2_3_peoplelicenses_fromLabelStudio/train/exp/weights/tfmodel/')
+tflite_model = converter.convert()
+
+with open('../Results/yolov7/yolov7-e6e_batch1_2_3_peoplelicenses_fromLabelStudio/train/exp/weights/tfmodel/best.tflite', 'wb') as f:
+	f.write(tflite_model)
