@@ -28,7 +28,8 @@ def detect(save_img=False):
     # Initialize
     set_logging()
     device = select_device(opt.device)
-    half = device.type != 'cpu'  # half precision only supported on CUDA
+    #half = device.type != 'cpu'  # half precision only supported on CUDA
+    half = False
 
     # Load model
     model = attempt_load(weights, map_location=device)  # load FP32 model
@@ -115,7 +116,6 @@ def detect(save_img=False):
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
@@ -123,15 +123,13 @@ def detect(save_img=False):
                         line = (cls, *xywh, conf) if opt.save_conf else (cls, *xywh)  # label format
                         with open(txt_path + '.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
+                    print(xyxy, conf, cls)
 
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
-                        plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
-                        
-
-                        #Adicionado por mim, para desfocar as pessoas e as matrículas detetadas
-                        """
-                        if(names[int(cls)] == 'Person' or 'License plate'):
+                        plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=2)
+                        help = ['License plate', 'Person']
+                        if(names[int(cls)] in help ):
                           x_min = int(xyxy[0]);
                           y_min = int(xyxy[1]);
                           x_max = int(xyxy[2]);
@@ -141,9 +139,18 @@ def detect(save_img=False):
                           blur_image = cv2.GaussianBlur(roi,(51,51),0)
                           
                           im0[y_min:y_max, x_min:x_max] = blur_image
+                          
+                        """if (names[int(cls)] == ):
+                          x_min = int(xyxy[0]);
+                          y_min = int(xyxy[1]);
+                          x_max = int(xyxy[2]);
+                          y_max = int(xyxy[3]);
 
-                        """
+                          roi = im0[y_min:y_max, x_min:x_max]
+                          blur_image = cv2.GaussianBlur(roi,(51,51),0)"""
 
+                       
+            
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
 
